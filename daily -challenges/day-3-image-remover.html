@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - Image Remover</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8f5;
+            color: #222;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #16834a;
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        button {
+            padding: 11px 16px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #remove-button {
+            background-color: #d93025;
+        }
+
+        #toggle-button {
+            background-color: #16834a;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #message {
+            text-align: center;
+            color: #16834a;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Image Remover</h1>
+
+        <p class="description">
+            Practise DOM manipulation by removing, hiding and showing
+            images dynamically.
+        </p>
+
+        <section class="image-gallery" id="image-gallery">
+            <img
+                src="https://picsum.photos/id/10/400/300"
+                alt="Green forest landscape"
+            >
+
+            <img
+                src="https://picsum.photos/id/15/400/300"
+                alt="Mountain landscape"
+            >
+
+            <img
+                src="https://picsum.photos/id/25/400/300"
+                alt="Nature and outdoor scenery"
+            >
+        </section>
+
+        <div class="buttons">
+            <button id="remove-button" type="button">
+                Remove All Images
+            </button>
+
+            <button id="toggle-button" type="button">
+                Hide Images
+            </button>
+        </div>
+
+        <p id="message" aria-live="polite">
+            Three images are currently displayed.
+        </p>
+    </main>
+
+    <script>
+        // Select the HTML elements
+        const imageGallery = document.querySelector("#image-gallery");
+        const removeButton = document.querySelector("#remove-button");
+        const toggleButton = document.querySelector("#toggle-button");
+        const message = document.querySelector("#message");
+
+        // Remove all images
+        removeButton.addEventListener("click", function () {
+            const images = imageGallery.querySelectorAll("img");
+
+            images.forEach(function (image) {
+                image.remove();
+            });
+
+            message.textContent = "All images have been removed.";
+
+            // Disable the hide/show button after removal
+            toggleButton.disabled = true;
+        });
+
+        // Bonus: Hide and show images
+        toggleButton.addEventListener("click", function () {
+            const images = imageGallery.querySelectorAll("img");
+
+            if (images.length === 0) {
+                message.textContent = "There are no images to hide or show.";
+                return;
+            }
+
+            const imagesAreHidden = images[0].hidden;
+
+            images.forEach(function (image) {
+                image.hidden = !imagesAreHidden;
+            });
+
+            if (imagesAreHidden) {
+                toggleButton.textContent = "Hide Images";
+                message.textContent = "Images are now visible.";
+            } else {
+                toggleButton.textContent = "Show Images";
+                message.textContent = "Images are now hidden.";
+            }
+        });
+    </script>
+</body>
+</html>
