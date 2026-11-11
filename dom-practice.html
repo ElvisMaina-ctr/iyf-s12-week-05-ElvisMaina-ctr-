@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="DOM manipulation practice for IYF Weekend Academy Season 12 Week 5.">
+
+    <title>DOM Practice | Elvis Maina</title>
+
+    <style>
+        /* General styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f4f7f5;
+            color: #263238;
+        }
+
+        /* Header */
+        #main-header {
+            background-color: #16834a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main container */
+        .container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        .title {
+            color: #16834a;
+        }
+
+        .content {
+            padding: 10px;
+            background-color: #f1f8f4;
+            margin-bottom: 10px;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 350px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #16834a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #106b3b;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #607d8b;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Header -->
+    <header id="main-header">
+
+        <h1>DOM Practice</h1>
+
+        <nav aria-label="Main navigation">
+
+            <ul class="nav-list">
+
+                <li>
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-link">About</a>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Article Section -->
+        <article>
+
+            <h2 class="title">Article Title</h2>
+
+            <p class="content">
+                This is the first paragraph.
+            </p>
+
+            <p class="content">
+                This is the second paragraph.
+            </p>
+
+        </article>
+
+
+        <!-- Form Section -->
+        <section>
+
+            <h2>Form Section</h2>
+
+            <p>Practice selecting and interacting with form elements.</p>
+
+            <form id="contact-form">
+
+                <label for="name">Full Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                >
+
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                >
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>&copy; 2026 Elvis Maina. All rights reserved.</p>
+
+    </footer>
+
+
+    <!-- DOM Practice JavaScript -->
+    <script src="dom.js" defer></script>
+
+</body>
+
+</html>
