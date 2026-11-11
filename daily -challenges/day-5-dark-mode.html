@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5 - Dark Mode</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8f5;
+            color: #222;
+            margin: 0;
+            padding: 30px 15px;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.4s ease;
+        }
+
+        h1 {
+            color: #16834a;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.7;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto;
+            padding: 12px 20px;
+            background-color: #16834a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #106638;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #171717;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .container {
+            background-color: #292929;
+            box-shadow: 0 3px 12px rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode h1 {
+            color: #63d995;
+        }
+
+        body.dark-mode button {
+            background-color: #63a87c;
+            color: #111;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #83c99b;
+        }
+
+        #theme-message {
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Dark Mode Toggle</h1>
+
+        <p>
+            Welcome to the Day 5 DOM Manipulation challenge.
+            This page allows you to switch between light mode and dark mode.
+        </p>
+
+        <p>
+            Your selected theme will be saved in your browser using
+            localStorage.
+        </p>
+
+        <button id="theme-toggle" type="button">
+            Enable Dark Mode
+        </button>
+
+        <p id="theme-message" aria-live="polite">
+            Light mode is currently active.
+        </p>
+    </main>
+
+    <script>
+        // Select the required HTML elements
+        const themeToggle = document.querySelector("#theme-toggle");
+        const themeMessage = document.querySelector("#theme-message");
+
+        // Apply the selected theme
+        function applyTheme(theme) {
+            if (theme === "dark") {
+                document.body.classList.add("dark-mode");
+
+                themeToggle.textContent = "Enable Light Mode";
+                themeMessage.textContent = "Dark mode is currently active.";
+            } else {
+                document.body.classList.remove("dark-mode");
+
+                themeToggle.textContent = "Enable Dark Mode";
+                themeMessage.textContent = "Light mode is currently active.";
+            }
+        }
+
+        // Load the saved theme when the page opens
+        const savedTheme = localStorage.getItem("preferredTheme") || "light";
+
+        applyTheme(savedTheme);
+
+        // Switch themes when the button is clicked
+        themeToggle.addEventListener("click", function () {
+            const isDarkMode = document.body.classList.contains("dark-mode");
+
+            if (isDarkMode) {
+                applyTheme("light");
+                localStorage.setItem("preferredTheme", "light");
+            } else {
+                applyTheme("dark");
+                localStorage.setItem("preferredTheme", "dark");
+            }
+        });
+    </script>
+</body>
+</html>
