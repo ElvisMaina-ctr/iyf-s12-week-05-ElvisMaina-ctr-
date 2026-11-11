@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Day 1 - Color Changer | Elvis Maina</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f5;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #16834a;
+            transition: color 0.3s ease;
+        }
+
+        button {
+            padding: 13px 22px;
+            background-color: #16834a;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #106b3b;
+        }
+
+        #color-code {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Day 1: Color Changer</h1>
+
+        <h2>DOM Manipulation Practice</h2>
+
+        <h3>Change My Color!</h3>
+
+        <p>
+            Click the button below to generate a random
+            HEX colour for all headings.
+        </p>
+
+        <button type="button" id="change-color">
+            Change Heading Colors
+        </button>
+
+        <p id="color-code" aria-live="polite">
+            Current color: #16834A
+        </p>
+
+        <footer>
+            <p>Developed by Elvis Maina | IYF Season 12</p>
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        // Select button and headings
+        const changeButton =
+            document.getElementById("change-color");
+
+        const headings =
+            document.querySelectorAll("h1, h2, h3");
+
+        const colorCode =
+            document.getElementById("color-code");
+
+
+        // Generate random HEX color
+        function generateRandomColor() {
+
+            const characters = "0123456789ABCDEF";
+
+            let color = "#";
+
+            for (let i = 0; i < 6; i++) {
+
+                const randomIndex = Math.floor(
+                    Math.random() * 16
+                );
+
+                color += characters[randomIndex];
+
+            }
+
+            return color;
+
+        }
+
+
+        // Change all heading colors
+        changeButton.addEventListener("click", function() {
+
+            const randomColor = generateRandomColor();
+
+            headings.forEach(function(heading) {
+
+                heading.style.color = randomColor;
+
+            });
+
+            colorCode.textContent =
+                "Current color: " + randomColor;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
