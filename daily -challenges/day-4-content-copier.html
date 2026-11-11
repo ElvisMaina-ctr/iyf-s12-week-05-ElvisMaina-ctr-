@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 - Content Copier</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8f5;
+            color: #222;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #16834a;
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .content-box {
+            min-height: 130px;
+            padding: 18px;
+            margin: 15px 0;
+            border: 2px solid #16834a;
+            border-radius: 8px;
+            background-color: #eef7f0;
+        }
+
+        .content-box h2 {
+            color: #16834a;
+            margin-top: 0;
+        }
+
+        #target-box {
+            background-color: #f8f8f8;
+            border-style: dashed;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 18px;
+            background-color: #16834a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #106638;
+        }
+
+        #message {
+            text-align: center;
+            color: #16834a;
+            font-weight: bold;
+        }
+
+        .drag-item {
+            padding: 12px;
+            background-color: #dcefe2;
+            border-radius: 5px;
+            cursor: grab;
+        }
+
+        #drop-zone {
+            min-height: 100px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 2px dashed #16834a;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #drop-zone.drag-over {
+            background-color: #dcefe2;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Content Copier</h1>
+
+        <p class="description">
+            Click the button to copy content from the source box
+            into the target box.
+        </p>
+
+        <!-- Source content -->
+        <section class="content-box" id="source-box">
+            <h2>Source Content</h2>
+            <p>
+                Welcome to the IYF Weekend Academy Season 12 DOM
+                Manipulation challenge.
+            </p>
+            <p>
+                JavaScript allows us to dynamically copy and update
+                webpage content.
+            </p>
+        </section>
+
+        <!-- Target content -->
+        <section class="content-box" id="target-box">
+            <h2>Target Content</h2>
+            <p id="target-content">
+                The copied content will appear here.
+            </p>
+        </section>
+
+        <button id="copy-button" type="button">
+            Copy Content
+        </button>
+
+        <p id="message" aria-live="polite"></p>
+
+        <hr>
+
+        <h2>Bonus: Drag and Drop</h2>
+
+        <p>Drag the item below into the drop zone.</p>
+
+        <div
+            class="drag-item"
+            id="drag-item"
+            draggable="true"
+        >
+            Drag this content into the drop zone.
+        </div>
+
+        <div id="drop-zone">
+            Drop the content here.
+        </div>
+    </main>
+
+    <script>
+        // Select the source and target elements
+        const sourceBox = document.querySelector("#source-box");
+        const targetBox = document.querySelector("#target-box");
+        const copyButton = document.querySelector("#copy-button");
+        const targetContent = document.querySelector("#target-content");
+        const message = document.querySelector("#message");
+
+        // Copy source content into target box
+        copyButton.addEventListener("click", function () {
+            targetBox.innerHTML = sourceBox.innerHTML;
+
+            message.textContent = "Content copied successfully!";
+        });
+
+        // Bonus: Drag and drop functionality
+        const dragItem = document.querySelector("#drag-item");
+        const dropZone = document.querySelector("#drop-zone");
+
+        // Start dragging
+        dragItem.addEventListener("dragstart", function (event) {
+            event.dataTransfer.setData("text/plain", dragItem.textContent);
+            event.dataTransfer.effectAllowed = "copy";
+        });
+
+        // Allow dropping
+        dropZone.addEventListener("dragover", function (event) {
+            event.preventDefault();
+            dropZone.classList.add("drag-over");
+        });
+
+        // Remove visual highlight when dragging away
+        dropZone.addEventListener("dragleave", function () {
+            dropZone.classList.remove("drag-over");
+        });
+
+        // Handle dropped content
+        dropZone.addEventListener("drop", function (event) {
+            event.preventDefault();
+
+            const copiedText = event.dataTransfer.getData("text/plain");
+
+            dropZone.textContent = copiedText;
+            dropZone.classList.remove("drag-over");
+        });
+    </script>
+</body>
+</html>
